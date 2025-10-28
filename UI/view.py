@@ -1,4 +1,7 @@
 import flet as ft
+from flet.core.alignment import center
+from flet.core.types import MainAxisAlignment
+
 from UI.alert import AlertManager
 
 '''
@@ -64,6 +67,14 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
+        text= ft.Text("Automobili", size=20, weight=ft.FontWeight.BOLD, text_align=center)
+        btn= ft.ElevatedButton("mostra", on_click=self.controller.mostra)
+
+        text2= ft.Text("Cerca Automobili", size=20, weight=ft.FontWeight.BOLD, text_align=center)
+        btn2= ft.ElevatedButton("Cerca", on_click=self.controller.cerca)
+
+        row= ft.Row([self.input_modello_auto,btn2], alignment=MainAxisAlignment.CENTER)
+
 
         # --- LAYOUT ---
         self.page.add(
@@ -83,9 +94,16 @@ class View:
 
             # Sezione 3
             # TODO
+            text,
+            btn,
+            self.lista_auto,
 
             # Sezione 4
             # TODO
+            text2,
+            row,
+            self.lista_auto_ricerca,
+
         )
 
     def cambia_tema(self, e):

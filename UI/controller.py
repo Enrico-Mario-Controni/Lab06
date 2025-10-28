@@ -1,4 +1,5 @@
 import flet as ft
+from UI import User
 from UI.view import View
 from model.model import Autonoleggio
 
@@ -29,3 +30,24 @@ class Controller:
 
     # Altre Funzioni Event Handler
     # TODO
+    def mostra(self,e):
+        U=User()
+        macchine=U.get_list_automobili()
+        self._view.lista_auto.controls.clear()
+        for auto in macchine:
+            self._view.lista_auto.controls.append(
+                ft.Text(f"{auto[0]} - {auto[1]} - {auto[2]} - {auto[3]} - {auto[4]} - {auto[5]}"))
+        self._view.update()
+
+    def cerca (self, e):
+        modello = self._view.input_modello_auto.value
+        U=User()
+        trovate= U.ricerca(modello)
+        self._view.lista_auto_ricerca.controls.clear()
+        for auto in trovate:
+            self._view.lista_auto_ricerca.controls.append(
+                ft.Text(f"{auto[0]}- {auto[1]} - {auto[2]} - {auto[3]} - {auto[4]} - {auto[5]}")
+            )
+
+        self._view.input_modello_auto.value = ""
+        self._view.update()
